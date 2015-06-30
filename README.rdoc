@@ -3,4 +3,4 @@
 A innovative ticketing system that allows users to crteate new events
 and sell them to users.
 
-= Proposed Stores can be found at (http://github.com/baphled/offical_tickets/features/proposed_stoires)[here]
+* Proposed Stores can be found at (here)[https://github.com/baphled/official_tickets/tree/development/features/proposed_stories/]
