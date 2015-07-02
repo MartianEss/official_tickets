@@ -1,0 +1,14 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 10
+  username: apple
+  password: 
+
+development:
+  <<: *default
+  database: official_tickets_development
+
+test:
+  <<: *default
+  database: official_ticket_test
