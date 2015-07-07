@@ -14,14 +14,12 @@ Feature: Creating a new account
     And I create my account
     Then I should have an unverified account
 
-  @wip
   Scenario: Event manager trying to sign in with an unverified account
     Given I am an unverified event manager
     When I sign in as an event manager
     Then I should not be signed in to my account
 
-  @wip
   Scenario: Event manager sign in
-    Given I am an unverified event manager
+    Given I am an verified event manager
     When I sign in as an event manager
     Then I should be signed in to my account
