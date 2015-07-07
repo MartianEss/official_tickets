@@ -1,0 +1,12 @@
+Event Manager: <%= @event_manager.first_name %> <%= @event_manager.last_name %></br>
+Contact Number: <%= @event_manager.contact_number %>
+
+<%= simple_form_for(@event_manager, url: { action: :update, controller: :event_managers }, html: { class: 'form-horizontal' }) do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :contact_number %>
+
+  <%= f.input :approved %>
+
+  <%= f.button :submit %>
+<% end %>

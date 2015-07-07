@@ -1,0 +1,9 @@
+<% if @event_managers.empty? %>
+  No event manager's are on the system.
+<% else %>
+  <ul>
+  <% @event_managers.each do |event_manager| %>
+    <li><%= event_manager.first_name %> <%= event_manager.last_name %> - <%= event_manager.approved? ? "Yes" : "No" %> - <%= link_to "Approve", customer_services_event_manager_path(id: event_manager.id) %></li>
+  <% end %>
+  </ul>
+<% end %>

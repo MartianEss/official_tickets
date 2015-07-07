@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   root 'home#index'
 
   devise_for :event_managers, path: 'event_managers'
+  devise_for :customer_services, path: 'customer_services'
+
+  namespace :customer_services do
+    resources :event_managers, except: [:new, :create]
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
