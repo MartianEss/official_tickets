@@ -28,6 +28,7 @@
           <% elsif current_customer_service %>
             <%= drop_down "Manage Event Managers" do %>
               <%= menu_item "Event Managers", customer_services_event_managers_path %>
+              <%= menu_item "Events", customer_services_events_path %>
             <% end %>
           <% else %>
             <%= menu_item "Event", events_path %>
