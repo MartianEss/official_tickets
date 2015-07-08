@@ -8,13 +8,18 @@ Rails.application.routes.draw do
   devise_for :event_managers, path: 'event_managers'
   devise_for :customer_services, path: 'customer_services'
 
+  # Customer Services based resources
   namespace :customer_services do
     resources :event_managers, except: [:new, :create]
   end
 
+  # Event Manager based resources
   namespace :event_managers do
     resources :events
   end
+
+  # Ticket purchaser based resources
+  resources :events, only: [:index, :show]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
