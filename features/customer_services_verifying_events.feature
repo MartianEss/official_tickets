@@ -10,12 +10,12 @@ Feature: Verifying Events
     Then "y@me.com" is emailed with the subject "Your account has been approved"
     And the events manager with "y@me.com" account is verified
     
-  @wip
   Scenario: Event verification
     Given I am signed in as a customer service user
-    And there is an unverified event
+    And there is an verified event manager with the email address "y@me.com"
+    And there is 1 unverified event
     And I am on the events verification page
     When I choose the unverified event
     And I verify the event
-    Then the events manager is emailed with the subject "You've event has been approved"
-    Then the event should be available for ticket purchases
+    Then "y@me.com" is emailed with the subject "Your event has been approved"
+    Then the event created by "y@me.com" should be available for ticket purchases

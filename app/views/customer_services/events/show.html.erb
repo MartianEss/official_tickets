@@ -1,0 +1,46 @@
+<%- model_class = Event -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
+  <dd><%= @event.title %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @event.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:location) %>:</strong></dt>
+  <dd><%= @event.location %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:genre) %>:</strong></dt>
+  <dd><%= @event.genre %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:dress_code) %>:</strong></dt>
+  <dd><%= @event.dress_code %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:date_from) %>:</strong></dt>
+  <dd><%= @event.date_from %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:date_to) %>:</strong></dt>
+  <dd><%= @event.date_to %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:time_to) %>:</strong></dt>
+  <dd><%= @event.time_to %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:time_from) %>:</strong></dt>
+  <dd><%= @event.time_from %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:contact_number) %>:</strong></dt>
+  <dd><%= @event.contact_number %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:ticket_type) %>:</strong></dt>
+  <dd><%= @event.ticket_type %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
+  <dd><%= @event.price %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:tickets_allocated) %>:</strong></dt>
+  <dd><%= @event.tickets_allocated %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:approved) %>:</strong></dt>
+  <dd><%= @event.approved %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:event_manager_id) %>:</strong></dt>
+  <dd><%= link_to @event.event_manager.full_name, customer_services_event_manager_path(id: @event.event_manager_id) %></dd>
+</dl>
+
+<%= simple_form_for(@event, url: { action: :update, controller: :events }, html: { class: 'form-horizontal' }) do |f| %>
+  <%= f.input :approved %>
+
+  <%= f.button :submit %>
+<%end %>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              customer_services_events_path, :class => 'btn btn-default'  %>

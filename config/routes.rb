@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # Customer Services based resources
   namespace :customer_services do
     resources :event_managers, except: [:new, :create]
+    resources :events, except: [:new, :create]
   end
 
   # Event Manager based resources

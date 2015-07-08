@@ -20,6 +20,14 @@ When(/^I fill in the following events information:$/) do |table|
   fill_in "event_tickets_allocated", with: value[:tickets_allocated]
 end
 
+Given(/^there is (\d+) unverified event$/) do |amount|
+  event_manager = EventManager.where(approved: true).first
+
+  amount.to_i.times do
+    Event.create!(event_params(event_manager: event_manager, approved: false))
+  end
+end
+
 When(/^I submit the event$/) do
   click_button 'Create Event'
 end
