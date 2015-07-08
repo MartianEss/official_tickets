@@ -36,6 +36,8 @@
         <%= menu_group pull: :right do %>
           <% if current_event_manager %>
             <%= menu_item "Log Out", destroy_event_manager_session_path, :method => :delete %>
+          <% elsif current_customer_service %>
+            <%= menu_item "Log Out", destroy_customer_service_session_path, :method => :delete %>
           <% else %>
             <%= menu_item "Log In", new_event_manager_session_path %>
           <% end %>
