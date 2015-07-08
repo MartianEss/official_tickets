@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OfficialTickets</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+
+    <!-- Begin page content -->
+    <div class="container">
+      <div class="page-header">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
+      <%= nav_bar fixed: :top, brand: "Official Tickets", responsive: true do %>
+        <%= menu_group do %>
+          <%= menu_divider %>
+          <% if current_event_manager %>
+            <%= drop_down "Manage Events" do %>
+              <%= menu_item "New Event", new_event_managers_event_path %>
+              <%= menu_item "Events", event_managers_events_path %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <%= menu_group pull: :right do %>
+          <% if current_event_manager %>
+            <%= menu_item "Log Out", destroy_event_manager_session_path, :method => :delete %>
+          <% else %>
+            <%= form_for @event_manager, url: session_path(:event_manager), html: {class: "navbar-form pull-right"} do |f| -%>
+              <p><%= f.text_field :email %></p>
+              <p><%= f.password_field :password %></p>
+              <p><%= f.submit "Sign in" %></p>
+            <% end -%>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <%= yield %>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+

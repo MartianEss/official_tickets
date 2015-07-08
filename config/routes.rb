@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'home#index'
+  root 'events#index'
+
+  get '/customer_services' => 'customer_services#index', as: :customer_services_root
+  get '/event_managers' => 'event_managers#index', as: :event_managers_root
 
   devise_for :event_managers, path: 'event_managers'
   devise_for :customer_services, path: 'customer_services'
