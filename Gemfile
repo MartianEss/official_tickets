@@ -64,3 +64,7 @@ end
 group :test do
   gem 'cucumber-rails', require: false
 end
+
+group :production do
+  gem 'rails_12factor'
+end
