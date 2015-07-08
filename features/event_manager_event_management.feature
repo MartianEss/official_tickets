@@ -1,39 +1,31 @@
-Feature: Creating a new account
-  As a event manager
-  I want to be able to sign up and store my event details
+Feature: Creating a new event
+  As an approved event manager
+  I want to be able to store my event details
 
-  @wip
   Scenario: Creating an event
-    Given the event manager is on the "New Events" page
-    And the user is already logged in
-    And I am on the "New Event" page
+    Given I am signed in as a verified event manager
+    And I am on the event manager's new events page
     When I fill in the following events information:
-      | field             | value                            |
-      | event             | Offical Events Opening           |
-      | iamge             | location_to_flyer                |
+      | title             | Offical Events Opening           |
       | description       | some information about the event |
       | location          | Brighton                         |
       | genre             | Breaks                           |
       | dress_code        | Casual                           |
-      | date_from         | 23-03-2020                       |
-      | date_to           | 23-03-2020                       |
-      | time_to           | 1100                             |
-      | time_from         | 2100                             |
+      | date_from         | 23/03/2020                       |
+      | date_to           | 23/03/2020                       |
+      | time_to           | 11:00                            |
+      | time_from         | 21:00                            |
       | contact_number    | 0208 222 2222                    |
       | ticket_type       | VIP                              |
       | price             | 24.00                            |
-      | tickets allocated | 100                              |
-    And I add the following DJs:
-      | name      |
-      | Ed Solo   |
-      | DJ Semtex |
+      | tickets_allocated | 100                              |
     And I submit the event
-    Then the event should be in the "Unavailable" state
+    Then the event should be awaiting approval
 
   @wip
   Scenario: The event manager is a new user
     Given the event manager is on the "New Events" page
-    And they are not signed up
+    Given I am an unverified event manager
     When I add a new event
     Then they are prompted to create a new account or sign in
 

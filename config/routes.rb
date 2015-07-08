@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     resources :event_managers, except: [:new, :create]
   end
 
+  namespace :event_managers do
+    resources :events
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

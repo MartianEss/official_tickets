@@ -1,0 +1,62 @@
+<%- model_class = Event -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:dress_code) %></th>
+      <th><%= model_class.human_attribute_name(:location) %></th>
+      <th><%= model_class.human_attribute_name(:genre) %></th>
+      <th><%= model_class.human_attribute_name(:date_from) %></th>
+      <th><%= model_class.human_attribute_name(:date_to) %></th>
+      <th><%= model_class.human_attribute_name(:time_to) %></th>
+      <th><%= model_class.human_attribute_name(:time_from) %></th>
+      <th><%= model_class.human_attribute_name(:contact_number) %></th>
+      <th><%= model_class.human_attribute_name(:ticket_type) %></th>
+      <th><%= model_class.human_attribute_name(:price) %></th>
+      <th><%= model_class.human_attribute_name(:tickets_allocated) %></th>
+      <th><%= model_class.human_attribute_name(:approved) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= link_to event.id, event_managers_event_path(event) %></td>
+        <td><%= event.title %></td>
+        <td><%= event.description %></td>
+        <td><%= event.dress_code %></td>
+        <td><%= event.location %></td>
+        <td><%= event.genre %></td>
+        <td><%= event.date_from %></td>
+        <td><%= event.date_to %></td>
+        <td><%= event.time_to %></td>
+        <td><%= event.time_from %></td>
+        <td><%= event.contact_number %></td>
+        <td><%= event.ticket_type %></td>
+        <td><%= event.price %></td>
+        <td><%= event.tickets_allocated %></td>
+        <td><%= event.approved %></td>
+        <td><%=l event.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_event_managers_event_path(event), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      event_managers_event_path(event),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_event_managers_event_path,
+            :class => 'btn btn-primary' %>

@@ -1,0 +1,32 @@
+<%= simple_form_for @event, url: { controller: :events }, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :title %>
+  <%= error_span(@event[:title]) %>
+  <%= f.input :description %>
+  <%= error_span(@event[:description]) %>
+  <%= f.input :dress_code %>
+  <%= error_span(@event[:dress_code]) %>
+  <%= f.input :location %>
+  <%= error_span(@event[:location]) %>
+  <%= f.input :genre %>
+  <%= error_span(@event[:genre]) %>
+  <%= f.input :date_from %>
+  <%= error_span(@event[:date_from]) %>
+  <%= f.input :date_to %>
+  <%= error_span(@event[:date_to]) %>
+  <%= f.input :time_to %>
+  <%= error_span(@event[:time_to]) %>
+  <%= f.input :time_from %>
+  <%= error_span(@event[:time_from]) %>
+  <%= f.input :contact_number %>
+  <%= error_span(@event[:contact_number]) %>
+  <%= f.input :ticket_type %>
+  <%= error_span(@event[:ticket_type]) %>
+  <%= f.input :price %>
+  <%= error_span(@event[:price]) %>
+  <%= f.input :tickets_allocated %>
+  <%= error_span(@event[:tickets_allocated]) %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                event_managers_events_path, :class => 'btn btn-default' %>
+<% end %>
