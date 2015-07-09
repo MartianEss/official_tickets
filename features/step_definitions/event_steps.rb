@@ -28,10 +28,41 @@ Given(/^there is (\d+) unverified event$/) do |amount|
   end
 end
 
+Given(/^there is (\d+) verified event$/) do |amount|
+  event_manager = EventManager.where(approved: true).first
+
+  amount.to_i.times do
+    Event.create!(event_params(event_manager: event_manager, approved: true))
+  end
+end
+
 When(/^I submit the event$/) do
   click_button 'Create Event'
 end
 
+When(/^I update the event's "(.*?)" with "(.*?)"$/) do |input, value|
+  if input.include?('Date')
+    select_date value, label: input
+  elsif input.include?('Time')
+    select_time value, label: input
+  else
+    fill_in "event_#{input}", with: value
+  end
+end
+
+When(/^I update the event$/) do
+  click_button 'Update Event'
+end
+
 Then(/^the event should be awaiting approval$/) do
   expect(Event.last).to be_unapproved
+end
+
+Then(/^the event should be unavailable$/) do
+  step %{the event should be awaiting approval}
+end
+
+
+Then(/^the event should still be available$/) do
+  expect(Event.last).to be_approved
 end

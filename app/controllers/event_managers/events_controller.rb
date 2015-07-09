@@ -27,10 +27,10 @@ class EventManagers::EventsController < EventManagers::ApplicationController
   def update
     @event = current_event_manager.events.find(params[:id])
 
-    if @event.update(event_params)
+    if @event.update_attributes(event_params)
       redirect_to event_managers_events_path
     else
-      render :new
+      render :edit
     end
   end
 

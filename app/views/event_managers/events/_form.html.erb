@@ -1,4 +1,5 @@
-<%= simple_form_for @event, url: { controller: :events }, :html => { :class => 'form-horizontal' } do |f| %>
+<%= simple_form_for @event, url: { controller: :events, action: (action_name == 'new') ? :create : :update }, :html => { :class => 'form-horizontal' } do |f| %>
+
   <%= f.input :title %>
   <%= error_span(@event[:title]) %>
   <%= f.input :description %>

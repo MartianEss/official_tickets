@@ -19,8 +19,10 @@ Rails.application.routes.draw do
 
   # Event Manager based resources
   namespace :event_managers do
-    resources :events
+    resources :events, as: :events
   end
+
+  patch "/event_managers/events" => "event_managers/events#update"
 
   # Ticket purchaser based resources
   resources :events, only: [:index, :show]
