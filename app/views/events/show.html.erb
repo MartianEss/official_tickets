@@ -36,5 +36,7 @@
   <dd><%= @event.event_manager_id %></dd>
 </dl>
 
+<%= link_to 'Purchase', new_event_order_path(event_id: @event.id), :class => 'btn btn-default'  %>
+</ br>
 <%= link_to t('.back', :default => t("helpers.links.back")),
               events_path, :class => 'btn btn-default'  %>

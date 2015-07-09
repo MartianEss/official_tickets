@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   devise_for :event_managers, path: 'event_managers'
   devise_for :customer_services, path: 'customer_services'
+  devise_for :ticket_purchaser, path: 'ticket_purchasers'
 
   # Customer Services based resources
   namespace :customer_services do
@@ -25,7 +26,9 @@ Rails.application.routes.draw do
   patch "/event_managers/events" => "event_managers/events#update"
 
   # Ticket purchaser based resources
-  resources :events, only: [:index, :show]
+  resources :events, only: [:index, :show] do
+    resources :orders, only: [:new, :index, :create, :show]
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

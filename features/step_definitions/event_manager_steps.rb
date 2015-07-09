@@ -30,6 +30,12 @@ Given(/^I am signed in as a verified event manager$/) do
   step %{I sign in as an event manager}
 end
 
+
+Given(/^an event manager has (\d+) approved event$/) do |amount|
+  step %{I am an unverified event manager}
+  step %{there is #{amount} verified event}
+end
+
 When(/^I fill in the following event information:$/) do |table|
    table.rows_hash.each_pair do |input, value|
      fill_in input, with: value

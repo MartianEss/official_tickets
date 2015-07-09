@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150707225614) do
+ActiveRecord::Schema.define(version: 20150709170524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,21 @@ ActiveRecord::Schema.define(version: 20150707225614) do
   add_index "event_managers", ["email"], name: "index_event_managers_on_email", unique: true, using: :btree
   add_index "event_managers", ["reset_password_token"], name: "index_event_managers_on_reset_password_token", unique: true, using: :btree
 
+  create_table "event_orders", force: :cascade do |t|
+    t.integer  "ticket_purchaser_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  create_table "event_tickets", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "ticket_purchaser_id"
+    t.float    "price"
+    t.string   "name"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
   create_table "events", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
@@ -79,5 +94,41 @@ ActiveRecord::Schema.define(version: 20150707225614) do
 
   add_index "events", ["event_manager_id"], name: "index_events_on_event_manager_id", using: :btree
   add_index "events", ["title"], name: "index_events_on_title", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "number_of_tickets"
+    t.integer  "ticket_purchaser_id"
+    t.integer  "event_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  create_table "ticket_purchasers", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "ticket_purchasers", ["email"], name: "index_ticket_purchasers_on_email", unique: true, using: :btree
+  add_index "ticket_purchasers", ["reset_password_token"], name: "index_ticket_purchasers_on_reset_password_token", unique: true, using: :btree
+
+  create_table "tickets", force: :cascade do |t|
+    t.string   "serial"
+    t.integer  "order_id"
+    t.integer  "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

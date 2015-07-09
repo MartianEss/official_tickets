@@ -1,0 +1,9 @@
+<%= simple_form_for [@event, @order], :html => { :class => 'form-horizontal' } do |f| %>
+
+  <%= f.input :number_of_tickets %>
+  <%= error_span(@order[:number_of_tickets]) %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                event_orders_path, :class => 'btn btn-default' %>
+<% end %>

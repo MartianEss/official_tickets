@@ -1,6 +1,8 @@
 class Event < ActiveRecord::Base
   belongs_to :event_manager
 
+  has_many :orders
+
   before_save :set_approval_status, unless: -> { self.new_record? }
 
   def time_to=(time)
