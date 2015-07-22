@@ -1,0 +1,32 @@
+<%- model_class = TicketsAllocation -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:price) %></th>
+      <th><%= model_class.human_attribute_name(:allocated) %></th>
+      <th><%= model_class.human_attribute_name(:event) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tickets_allocations.each do |tickets_allocation| %>
+      <tr>
+        <td><%= link_to tickets_allocation.id, event_managers_event_tickets_allocations_path(tickets_allocation) %></td>
+        <td><%= tickets_allocation.name %></td>
+        <td><%= tickets_allocation.price %></td>
+        <td><%= tickets_allocation.allocated %></td>
+        <td><%= tickets_allocation.event.title %></td>
+        <td><%=l tickets_allocation.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_event_managers_event_path,
+            :class => 'btn btn-primary' %>

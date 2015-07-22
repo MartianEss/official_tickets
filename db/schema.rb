@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709170524) do
+ActiveRecord::Schema.define(version: 20150722202536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,21 +56,6 @@ ActiveRecord::Schema.define(version: 20150709170524) do
   add_index "event_managers", ["approved"], name: "index_event_managers_on_approved", using: :btree
   add_index "event_managers", ["email"], name: "index_event_managers_on_email", unique: true, using: :btree
   add_index "event_managers", ["reset_password_token"], name: "index_event_managers_on_reset_password_token", unique: true, using: :btree
-
-  create_table "event_orders", force: :cascade do |t|
-    t.integer  "ticket_purchaser_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-  end
-
-  create_table "event_tickets", force: :cascade do |t|
-    t.integer  "event_id"
-    t.integer  "ticket_purchaser_id"
-    t.float    "price"
-    t.string   "name"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-  end
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
@@ -129,6 +114,16 @@ ActiveRecord::Schema.define(version: 20150709170524) do
     t.integer  "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tickets_allocations", force: :cascade do |t|
+    t.string   "name",                         null: false
+    t.float    "price",                        null: false
+    t.integer  "allocated",        default: 0, null: false
+    t.integer  "event_manager_id"
+    t.integer  "event_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
 end
