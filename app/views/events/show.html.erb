@@ -36,7 +36,20 @@
   <dd><%= @event.event_manager_id %></dd>
 </dl>
 
-<%= link_to 'Purchase', new_event_order_path(event_id: @event.id), :class => 'btn btn-default'  %>
+<%- model_class = TicketsAllocation -%>
+
+<% @event.tickets_allocations.each do |tickets_allocation| %>
+<dl>
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= tickets_allocation.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
+  <dd><%= tickets_allocation.price %></dd>
+  <dt><strong>Tickets left:</strong></dt>
+  <dd><%= tickets_allocation.remaining %></dd>
+  <dd><%= link_to 'Purchase', new_event_ticket_order_path(event_id: tickets_allocation.event_id, ticket_id: tickets_allocation.id), :class => 'btn btn-default'  %></dd>
+</dl>
+<%end %>
+
 </ br>
 <%= link_to t('.back', :default => t("helpers.links.back")),
               events_path, :class => 'btn btn-default'  %>

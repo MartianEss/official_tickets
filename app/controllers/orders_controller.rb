@@ -8,14 +8,16 @@ class OrdersController < ApplicationController
 
   def new
     @event = Event.where(approved: true).find(params[:event_id])
+    @ticket = TicketsAllocation.find(params[:ticket_id])
     @order = Order.new(number_of_tickets: @number_of_tickets)
   end
 
   def create
     @event = Event.where(approved: true).find(params[:event_id])
+    @tickets_allocation = TicketsAllocation.find(params[:ticket_id])
     @order = @event.orders.new(order_params)
     @order.ticket_purchaser = current_ticket_purchaser
-    if @order.save!
+    if @order.process
       redirect_to event_orders_path(@event)
     else
       render :new

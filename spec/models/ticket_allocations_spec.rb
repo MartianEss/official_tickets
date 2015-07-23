@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe TicketAllocation, type: :model do
+RSpec.describe TicketsAllocation, type: :model do
   subject { described_class.new(name: 'Early Bird', price: 11.12, allocated: 6, event: event) }
   let(:event) { Event.create(event_params) }
 

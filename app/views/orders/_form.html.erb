@@ -1,9 +1,13 @@
-<%= simple_form_for [@event, @order], :html => { :class => 'form-horizontal' } do |f| %>
+Event: <%= @event.title %></br>
+Venue: <%= @event.location %></br>
+Price: <%= @tickets_allocation.price %></br>
+Total Allocated: <%= @tickets_allocation.allocated %></br>
+<%= simple_form_for event_ticket_orders_path(event_id: @event.id, ticket_id: @ticket.id), :html => { :class => 'form-horizontal' } do |f| %>
 
   <%= f.input :number_of_tickets %>
   <%= error_span(@order[:number_of_tickets]) %>
 
   <%= f.button :submit, :class => 'btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                event_orders_path, :class => 'btn btn-default' %>
+                event_ticket_orders_path(id: @order, event_id: @event, ticket_id: @ticket), :class => 'btn btn-default' %>
 <% end %>

@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
   belongs_to :event_manager
 
   has_many :orders
+  has_many :tickets_allocations
 
   before_save :set_approval_status, unless: -> { self.new_record? }
 
