@@ -9,6 +9,10 @@ class Order < ActiveRecord::Base
   validates_associated :ticket_purchaser
   validates_associated :tickets_allocation
 
+  def process
+    (has_enough_tickets_for_sale?) ? true : false
+  end
+
   def has_enough_tickets_for_sale?
     if number_of_tickets > (tickets_allocation.allocated - tickets.count)
       errors.add(:self, 'Not enough tickets available')

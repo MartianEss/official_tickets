@@ -26,7 +26,10 @@ RSpec.describe Order, type: :model do
     it 'generates the tickets'
 
     context 'failed order' do
-      it 'event does not have enough tickets'
+      it 'event does not have enough tickets' do
+        allow(subject).to receive(:has_enough_tickets_for_sale?).and_return false
+        expect(subject.process).to eql(false)
+      end
     end
   end
 
