@@ -20,6 +20,14 @@ RSpec.describe Order, type: :model do
     expect(subject).to be_invalid
   end
 
+  describe '#save' do
+    it 'stores the total price' do
+      subject.save
+
+      expect(subject.total_price).to eql(33.36)
+    end
+  end
+
   describe '#process' do
     it 'checks tickets are available' do
       expect(subject).to receive(:has_enough_tickets_for_sale?).and_return true
@@ -52,8 +60,6 @@ RSpec.describe Order, type: :model do
         expect(subject.tickets).not_to receive(:purchase)
         subject.process
       end
-
-      it 'does not create tickets'
     end
   end
 

@@ -9,12 +9,20 @@ class Order < ActiveRecord::Base
   validates_associated :ticket_purchaser
   validates_associated :tickets_allocation
 
+  before_save :set_total_price
+
   def process
     if save
       tickets.purchase(self)
     else
       false
     end
+  end
+
+  protected
+
+  def set_total_price
+    number_of_tickets.times { self.total_price += tickets_allocation.price }
   end
 
   def has_enough_tickets_for_sale?
