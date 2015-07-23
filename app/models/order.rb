@@ -13,7 +13,8 @@ class Order < ActiveRecord::Base
 
   def process
     if save
-      tickets.purchase(self)
+      event = self.tickets_allocation.event
+      tickets.purchase(self, event)
     else
       false
     end

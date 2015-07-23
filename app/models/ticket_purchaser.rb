@@ -5,4 +5,5 @@ class TicketPurchaser < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :orders
+  has_many :tickets
 end

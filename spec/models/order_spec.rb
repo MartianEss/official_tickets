@@ -35,7 +35,7 @@ RSpec.describe Order, type: :model do
     end
 
     it 'saves the order' do
-      expect(subject).to receive(:save).and_return(true)
+      expect(subject).to receive(:save).and_return(true).at_least(:once)
       subject.process
     end
 
@@ -49,9 +49,10 @@ RSpec.describe Order, type: :model do
     context 'failed order' do
       let(:tickets_allocation) { TicketsAllocation.create!(name: 'Early Bird', price: 11.12, allocated: 2, event: event) }
 
+      subject { described_class.new(ticket_purchaser: ticket_purchaser, tickets_allocation: tickets_allocation, number_of_tickets: 3) }
+
       it 'event does not have enough tickets' do
-        allow(subject).to receive(:has_enough_tickets_for_sale?).and_return false
-        expect(subject.process).to eql(false)
+        expect(subject.process).to be false
       end
 
       it 'does not save the order' do
