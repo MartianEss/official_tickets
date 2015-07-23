@@ -10,7 +10,11 @@ class Order < ActiveRecord::Base
   validates_associated :tickets_allocation
 
   def process
-    (has_enough_tickets_for_sale?) ? true : false
+    if save
+      tickets.purchase(self)
+    else
+      false
+    end
   end
 
   def has_enough_tickets_for_sale?
