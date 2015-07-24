@@ -6,6 +6,10 @@ class Event < ActiveRecord::Base
 
   before_save :set_approval_status, unless: -> { self.new_record? }
 
+  def venue
+    'need to add attribute'
+  end
+
   def time_to=(time)
     super time.change(sec: 0)
   end

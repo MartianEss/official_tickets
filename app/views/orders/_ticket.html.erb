@@ -1,0 +1,22 @@
+<section class='ticket'>
+  <section class='event-information'>
+    <h2><%= ticket.event.title.upcase %></h2>
+    <h4>@ <strong><%= ticket.event.venue %></strong></h4>
+    <h5><%= ticket.event.location %></h5>
+  </section>
+
+  <section class='event-date'>
+    <p><strong>Date:</strong> <%= ticket.event.date_from.strftime("%A %d %B %Y") %></p>
+    <p><strong>Time:</strong> <%= ticket.event.time_from.strftime("%l:%M%p") %> - <%= ticket.event.time_to.strftime("%l:%M%p") %></p>
+  </section>
+
+  <section class='event-reference'>
+    <p><strong>Ref:</strong> <%= ticket.serial %></p>
+    <p><strong>Booked by:</strong> <%= ticket.order.ticket_purchaser.full_name %></p>
+  </section>
+
+  <section class='ticket-information'>
+    <p><strong>Ticket Type:</strong> <%= ticket.order.tickets_allocation.name %></p>
+    <p><strong>Ticket Price:</strong> <%= ticket.order.tickets_allocation.price %></p>
+  </section>
+</section>

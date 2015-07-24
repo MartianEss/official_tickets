@@ -14,5 +14,12 @@
   <dd><%= @event.title %></dd>
 </dl>
 
+<% if @order.tickets %>
+  <h2><%= @order.tickets.count %> Tickets</h2>
+  <% @order.tickets.each do |ticket| %>
+    <%= render :partial => 'ticket', locals: { ticket: ticket } %>
+  <% end %>
+<% end %>
+
 <%= link_to t('.back', :default => t("helpers.links.back")),
-              event_ticket_orders_path, :class => 'btn btn-default'  %>
+  event_ticket_orders_path, :class => 'btn btn-default'  %>
