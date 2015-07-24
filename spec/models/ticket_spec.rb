@@ -24,6 +24,18 @@ RSpec.describe Ticket, type: :model do
     expect(subject.ticket_purchaser).to eql ticket_purchaser
   end
 
+  context 'after saving' do
+    let(:expected_serial) { "%.3s-%.6d" % [event.title.upcase, (Ticket.where(event: event).count)] }
+
+    it 'generates a unique serial' do
+      subject.save
+
+      expect(subject.serial).to eql(expected_serial)
+    end
+
+    it 'sends an email to the ticket purchaser'
+  end
+
   context 'invalid ticket' do
     it 'does not have a order' do
       allow(subject).to receive(:order).and_return nil

@@ -7,6 +7,8 @@ class Ticket < ActiveRecord::Base
 
   validates_presence_of :order, :event, :ticket_purchaser
 
+  before_create :set_serial
+
   def self.purchase(order, event)
     begin
       self.create_tickets(order, event)
@@ -23,5 +25,9 @@ class Ticket < ActiveRecord::Base
 
   def self.create_tickets(order, event)
     order.number_of_tickets.times { self.create!(order: order, event: event, ticket_purchaser: order.ticket_purchaser) }
+  end
+
+  def set_serial
+    self.serial = "%.3s-%.6d" % [event.title.upcase, (Ticket.where(event: event).count + 1)]
   end
 end
