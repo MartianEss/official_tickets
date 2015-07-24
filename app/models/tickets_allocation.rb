@@ -3,6 +3,6 @@ class TicketsAllocation < ActiveRecord::Base
   belongs_to :order
 
   def remaining
-    20
+    Ticket.remaining(self, self.event)
   end
 end

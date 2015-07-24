@@ -1,13 +1,28 @@
 Event: <%= @event.title %></br>
 Venue: <%= @event.location %></br>
 Price: <%= @tickets_allocation.price %></br>
-Total Allocated: <%= @tickets_allocation.allocated %></br>
-<%= simple_form_for event_ticket_orders_path(event_id: @event.id, ticket_id: @ticket.id), :html => { :class => 'form-horizontal' } do |f| %>
+Tickets left: <%= Ticket.remaining(@tickets_allocation, @event) %></br></br>
+<%= simple_form_for @order, url: event_ticket_orders_path(event_id: @event.id, ticket_id: @tickets_allocation.id), :html => { :class => 'form-horizontal' } do |f| %>
+
+  <div id="dropin"></div>
 
   <%= f.input :number_of_tickets %>
   <%= error_span(@order[:number_of_tickets]) %>
 
   <%= f.button :submit, :class => 'btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                event_ticket_orders_path(id: @order, event_id: @event, ticket_id: @ticket), :class => 'btn btn-default' %>
+  <%= @params %>
 <% end %>
+
+<script type="text/javascript">
+  function setupBT() {
+    braintree.setup("<%=@client_token%>", 'dropin', {
+      container: 'dropin'
+    });
+  }
+  if (window.addEventListener)
+    window.addEventListener("load", setupBT, false);
+  else if (window.attachEvent)
+    window.attachEvent("onload", setupBT);
+  else window.onload = setupBT;
+  </script>
+</script>

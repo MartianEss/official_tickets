@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   # Ticket purchaser based resources
   resources :events, only: [:index, :show] do
     resources :tickets_allocations, only: [], as: :tickets do
-      resources :orders, only: [:new, :index, :create, :show]
+      resources :orders, only: [:new, :index, :create, :show], as: :orders
     end
   end
 

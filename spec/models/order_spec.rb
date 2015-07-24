@@ -29,21 +29,23 @@ RSpec.describe Order, type: :model do
   end
 
   describe '#process' do
+    let(:nonce) { 'nonce-from-the-client' }
+
     it 'checks tickets are available' do
       expect(subject).to receive(:has_enough_tickets_for_sale?).and_return true
-      subject.process
+      subject.process(nonce, tickets_allocation, ticket_purchaser)
     end
 
     it 'saves the order' do
       expect(subject).to receive(:save).and_return(true).at_least(:once)
-      subject.process
+      subject.process(nonce, tickets_allocation, ticket_purchaser)
     end
 
     it 'purchase tickets' do
       allow(subject).to receive(:save).and_return true
 
       expect(subject.tickets).to receive(:purchase).and_return true
-      subject.process
+      subject.process(nonce, tickets_allocation, ticket_purchaser)
     end
 
     context 'failed order' do
@@ -52,14 +54,18 @@ RSpec.describe Order, type: :model do
       subject { described_class.new(ticket_purchaser: ticket_purchaser, tickets_allocation: tickets_allocation, number_of_tickets: 3) }
 
       it 'event does not have enough tickets' do
-        expect(subject.process).to be false
+        expect(subject.process(nonce, tickets_allocation, ticket_purchaser)).to be false
       end
 
       it 'does not save the order' do
         allow(subject).to receive(:save).and_return false
 
         expect(subject.tickets).not_to receive(:purchase)
-        subject.process
+        subject.process(nonce, tickets_allocation, ticket_purchaser)
+      end
+
+      context 'payment failed' do
+        it 'card declined'
       end
     end
   end

@@ -58,12 +58,6 @@ RSpec.describe Ticket, type: :model do
       expect(order.tickets.count).to eql(3)
     end
 
-    it 'makes the payment' do
-      expect(Ticket).to receive(:make_payment)
-
-      Ticket.purchase(order, event)
-    end
-
     context 'failed purchase' do
       it 'does not create tickets'
     end

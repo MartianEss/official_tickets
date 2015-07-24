@@ -10,13 +10,9 @@ class Ticket < ActiveRecord::Base
   def self.purchase(order, event)
     begin
       self.create_tickets(order, event)
-      self.make_payment(order, event)
     rescue Exception
       false
     end
-  end
-
-  def self.make_payment(order, event)
   end
 
   def self.remaining(tickets_allocation, event)
