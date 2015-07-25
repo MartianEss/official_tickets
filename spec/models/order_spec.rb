@@ -82,8 +82,4 @@ RSpec.describe Order, type: :model do
       end
     end
   end
-
-  describe '#generate_tickets' do
-    it 'creates the appropriate number of tickets'
-  end
 end

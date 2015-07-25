@@ -7,6 +7,7 @@ class Ticket < ActiveRecord::Base
   belongs_to :order
   belongs_to :event
   belongs_to :ticket_purchaser
+  belongs_to :ticket_allocation
 
   validates_associated :order
 
@@ -25,7 +26,7 @@ class Ticket < ActiveRecord::Base
   end
 
   def self.remaining(tickets_allocation, event)
-    (tickets_allocation.allocated - Ticket.where(event: event).count)
+    (tickets_allocation.allocated - Ticket.where(event: event, tickets_allocation_id: tickets_allocation.id).count)
   end
 
   protected

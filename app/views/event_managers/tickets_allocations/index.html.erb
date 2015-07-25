@@ -9,6 +9,7 @@
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:price) %></th>
       <th><%= model_class.human_attribute_name(:allocated) %></th>
+      <th><%= model_class.human_attribute_name(:remaining) %></th>
       <th><%= model_class.human_attribute_name(:event) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
     </tr>
@@ -20,6 +21,7 @@
         <td><%= tickets_allocation.name %></td>
         <td><%= tickets_allocation.price %></td>
         <td><%= tickets_allocation.allocated %></td>
+        <td><%= tickets_allocation.remaining %></td>
         <td><%= tickets_allocation.event.title %></td>
         <td><%=l tickets_allocation.created_at %></td>
       </tr>
