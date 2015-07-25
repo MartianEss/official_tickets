@@ -4,6 +4,12 @@ class EventManagers::TicketsAllocationsController < EventManagers::ApplicationCo
     @tickets_allocations = @event.tickets_allocations
   end
 
+  def show
+    @event = Event.find(params[:event_id])
+    @tickets_allocation = @event.tickets_allocations.find(params[:id])
+    @tickets = Ticket.where(event_id: params[:event_id], tickets_allocation_id: params[:id])
+  end
+
   def new
     @tickets_allocation = TicketsAllocation.new(event_id: params[:event_id])
   end

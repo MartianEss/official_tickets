@@ -7,13 +7,21 @@ class Ticket < ActiveRecord::Base
   belongs_to :order
   belongs_to :event
   belongs_to :ticket_purchaser
-  belongs_to :ticket_allocation
+  belongs_to :tickets_allocation
 
   validates_associated :order
 
   validates_presence_of :order, :event, :ticket_purchaser
 
   before_create :set_serial
+
+  def used?
+    used ? 'Used' : 'Unused'
+  end
+
+  def price
+    self.tickets_allocation.price
+  end
 
   def barcode
     barcode = Barby::Code128B.new(self.serial)

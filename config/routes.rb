@@ -21,7 +21,11 @@ Rails.application.routes.draw do
   # Event Manager based resources
   namespace :event_managers do
     resources :events, as: :events do
-      resources :tickets_allocations, only: [:index, :new, :create, :show]
+      resources :tickets_allocations, only: [:index, :new, :create, :show] do
+        resource :ticket, only: [:index] do
+          post 'used'
+        end
+      end
     end
   end
 

@@ -1,0 +1,21 @@
+<%- model_class = TicketsAllocation -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<%- model_class = Event -%>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:event) %>:</strong></dt>
+  <dd><%= @event.title %></dd>
+<%- model_class = TicketsAllocation -%>
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @tickets_allocation.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
+  <dd><%= @tickets_allocation.price %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:allocated) %>:</strong></dt>
+  <dd><%= @tickets_allocation.allocated %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:remaining) %>:</strong></dt>
+  <dd><%= @tickets_allocation.remaining %></dd>
+</dl>
+
+  <%= render :partial => 'tickets', locals: { tickets: @tickets, event: @event, tickets_allocation: @tickets_allocation } %>
