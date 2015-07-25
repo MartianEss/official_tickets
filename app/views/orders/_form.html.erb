@@ -9,6 +9,9 @@ Tickets left: <%= Ticket.remaining(@tickets_allocation, @event) %></br></br>
   <%= f.input :number_of_tickets %>
   <%= error_span(@order[:number_of_tickets]) %>
 
+  <%= f.input :names_on_ticket %>
+  <%= error_span(@order[:names_on_ticket]) %>
+
   <%= f.button :submit, :class => 'btn-primary' %>
   <%= @params %>
 <% end %>

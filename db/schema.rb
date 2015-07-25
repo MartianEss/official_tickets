@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150723190230) do
+ActiveRecord::Schema.define(version: 20150725135724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,13 +68,11 @@ ActiveRecord::Schema.define(version: 20150723190230) do
     t.time     "time_to"
     t.time     "time_from"
     t.string   "contact_number"
-    t.string   "ticket_type"
-    t.float    "price"
-    t.integer  "tickets_allocated"
-    t.boolean  "approved",          default: false
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.boolean  "approved",         default: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "event_manager_id"
+    t.string   "venue",            default: "",    null: false
   end
 
   add_index "events", ["event_manager_id"], name: "index_events_on_event_manager_id", using: :btree
@@ -87,6 +85,7 @@ ActiveRecord::Schema.define(version: 20150723190230) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.float    "total_price",         default: 0.0, null: false
+    t.string   "names_on_ticket",     default: "",  null: false
   end
 
   create_table "ticket_purchasers", force: :cascade do |t|
@@ -113,9 +112,10 @@ ActiveRecord::Schema.define(version: 20150723190230) do
     t.string   "serial"
     t.integer  "order_id"
     t.integer  "event_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "ticket_purchaser_id"
+    t.string   "ordered_for",         default: "", null: false
   end
 
   create_table "tickets_allocations", force: :cascade do |t|

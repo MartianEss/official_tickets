@@ -16,9 +16,6 @@
       <th><%= model_class.human_attribute_name(:time_to) %></th>
       <th><%= model_class.human_attribute_name(:time_from) %></th>
       <th><%= model_class.human_attribute_name(:contact_number) %></th>
-      <th><%= model_class.human_attribute_name(:ticket_type) %></th>
-      <th><%= model_class.human_attribute_name(:price) %></th>
-      <th><%= model_class.human_attribute_name(:tickets_allocated) %></th>
       <th><%= model_class.human_attribute_name(:approved) %></th>
       <th><%= model_class.human_attribute_name(:event_manager_id) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
@@ -39,9 +36,6 @@
         <td><%= event.time_to %></td>
         <td><%= event.time_from %></td>
         <td><%= event.contact_number %></td>
-        <td><%= event.ticket_type %></td>
-        <td><%= event.price %></td>
-        <td><%= event.tickets_allocated %></td>
         <td><%= event.approved %></td>
         <td><%= event.event_manager_id %></td>
         <td><%=l event.created_at %></td>

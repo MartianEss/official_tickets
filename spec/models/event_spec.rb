@@ -28,10 +28,6 @@ RSpec.describe Event, type: :model do
         time_from: Faker::Time.between(Time.now, Time.now.next_year, :all),
         time_to: Faker::Time.between(Time.now.tomorrow, Time.now.next_year, :all),
 
-        ticket_type: Faker::Lorem.word,
-        tickets_allocated: rand(1000),
-        price: Faker::Commerce.price,
-
         approved: true
       }
     end

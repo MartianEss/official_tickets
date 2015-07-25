@@ -40,6 +40,7 @@ class EventManagers::EventsController < EventManagers::ApplicationController
     params.require(:event).permit(
       :title,
       :description,
+      :venue,
       :location,
       :genre,
       :dress_code,
@@ -47,10 +48,7 @@ class EventManagers::EventsController < EventManagers::ApplicationController
       :date_to,
       :time_to,
       :time_from,
-      :contact_number,
-      :ticket_type,
-      :price,
-      :tickets_allocated
+      :contact_number
     )
   end
 end

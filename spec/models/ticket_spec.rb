@@ -8,7 +8,7 @@ RSpec.describe Ticket, type: :model do
   end
 
   let(:tickets_allocation) { TicketsAllocation.create!(name: 'Early Bird', price: 11.12, allocated: 3, event: event) }
-  let(:order) { Order.create!(ticket_purchaser: ticket_purchaser, tickets_allocation: tickets_allocation, number_of_tickets: 3) }
+  let(:order) { Order.create!(ticket_purchaser: ticket_purchaser, tickets_allocation: tickets_allocation, number_of_tickets: 3, names_on_ticket: 'foo wong, bar jones, joe smith') }
 
   subject { described_class.new(order: order, event: event, ticket_purchaser: ticket_purchaser) }
 

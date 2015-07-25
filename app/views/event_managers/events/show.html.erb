@@ -24,12 +24,6 @@
   <dd><%= @event.time_from %></dd>
   <dt><strong><%= model_class.human_attribute_name(:contact_number) %>:</strong></dt>
   <dd><%= @event.contact_number %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:ticket_type) %>:</strong></dt>
-  <dd><%= @event.ticket_type %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
-  <dd><%= @event.price %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:tickets_allocated) %>:</strong></dt>
-  <dd><%= @event.tickets_allocated %></dd>
   <dt><strong><%= model_class.human_attribute_name(:approved) %>:</strong></dt>
   <dd><%= @event.approved %></dd>
 </dl>
@@ -38,6 +32,8 @@
               event_managers_events_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_event_managers_event_path(@event), :class => 'btn btn-default' %>
+<%= link_to 'Allocate Tickets',
+              new_event_managers_event_tickets_allocation_path(@event), :class => 'btn btn-default' %>
 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               event_managers_event_path(@event),
               :method => 'delete',

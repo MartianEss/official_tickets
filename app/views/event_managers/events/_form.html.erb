@@ -6,6 +6,8 @@
   <%= error_span(@event[:description]) %>
   <%= f.input :dress_code %>
   <%= error_span(@event[:dress_code]) %>
+  <%= f.input :venue %>
+  <%= error_span(@event[:venue]) %>
   <%= f.input :location %>
   <%= error_span(@event[:location]) %>
   <%= f.input :genre %>
@@ -20,12 +22,6 @@
   <%= error_span(@event[:time_from]) %>
   <%= f.input :contact_number %>
   <%= error_span(@event[:contact_number]) %>
-  <%= f.input :ticket_type %>
-  <%= error_span(@event[:ticket_type]) %>
-  <%= f.input :price %>
-  <%= error_span(@event[:price]) %>
-  <%= f.input :tickets_allocated %>
-  <%= error_span(@event[:tickets_allocated]) %>
 
   <%= f.button :submit, :class => 'btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

@@ -5,7 +5,7 @@ RSpec.describe Order, type: :model do
   let(:tickets_allocation) { TicketsAllocation.create!(name: 'Early Bird', price: 11.12, allocated: 3, event: event) }
   let(:ticket_purchaser) { TicketPurchaser.create!(email: Faker::Internet.email, password: 'password', password_confirmation: 'password') }
 
-  subject { described_class.new(ticket_purchaser: ticket_purchaser, tickets_allocation: tickets_allocation, number_of_tickets: 3) }
+  subject { described_class.new(ticket_purchaser: ticket_purchaser, tickets_allocation: tickets_allocation, number_of_tickets: 3, names_on_ticket: 'foo, bar baz, joe smith') }
 
   it 'has ticket information' do
     expect(subject.tickets_allocation).to eql(tickets_allocation)
@@ -20,11 +20,24 @@ RSpec.describe Order, type: :model do
     expect(subject).to be_invalid
   end
 
+  it 'must have the equal number of names to tickets being purchased' do
+    subject.names_on_ticket = 'foo, bar baz, joe smith'
+
+    expect(subject).to be_valid
+  end
+
   describe '#save' do
     it 'stores the total price' do
       subject.save
 
       expect(subject.total_price).to eql(33.36)
+    end
+
+    it 'must have the same number of tickets to names on tickets' do
+      subject.names_on_ticket = 'foo, bar baz'
+
+      expect(subject).to be_invalid
+      expect(subject.errors.messages[:names_on_ticket]).to include('Must add 3 names, only have 2')
     end
   end
 
@@ -54,7 +67,7 @@ RSpec.describe Order, type: :model do
       subject { described_class.new(ticket_purchaser: ticket_purchaser, tickets_allocation: tickets_allocation, number_of_tickets: 3) }
 
       it 'event does not have enough tickets' do
-        expect(subject.process(nonce, tickets_allocation, ticket_purchaser)).to be false
+        expect(subject.process(nonce, tickets_allocation, ticket_purchaser)).to be_falsey
       end
 
       it 'does not save the order' do

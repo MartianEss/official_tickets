@@ -16,7 +16,7 @@
   <tbody>
     <% @tickets_allocations.each do |tickets_allocation| %>
       <tr>
-        <td><%= link_to tickets_allocation.id, event_managers_event_tickets_allocations_path(tickets_allocation) %></td>
+        <td><%= link_to tickets_allocation.id, event_managers_event_tickets_allocation_path(id: tickets_allocation.id) %></td>
         <td><%= tickets_allocation.name %></td>
         <td><%= tickets_allocation.price %></td>
         <td><%= tickets_allocation.allocated %></td>
@@ -27,6 +27,5 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_event_managers_event_path,
-            :class => 'btn btn-primary' %>
+<%= link_to 'Allocate Tickets',
+  new_event_managers_event_tickets_allocation_path(@event), :class => 'btn btn-default' %>

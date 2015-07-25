@@ -13,3 +13,67 @@
  *= require_tree .
  *= require_self
  */
+section.ticket {
+  border: solid thin;
+  padding: 2px;
+  margin: 20px;
+  width: 540px;
+  height: 240px;
+}
+
+section.event-date {
+  font-weight: bold;
+}
+
+section.information {
+  margin: 0px 0px 0px 40px;
+  width: 344px;
+  float: left;
+}
+
+section.ticket-information {
+  width: 150px;
+  float: right;
+  top: 70px;
+  left: 20px;
+  background: gray;
+}
+
+section.event {
+  float: right;
+}
+
+section.fixed {
+  position: relative;
+}
+
+section.event-barcode {
+  position: relative;
+  top: 34px;
+  right: 45px;
+  float: left;
+}
+
+.rotate {
+
+  /* Safari */
+  -webkit-transform: rotate(-90deg);
+
+  /* Firefox */
+  -moz-transform: rotate(-90deg);
+
+  /* IE */
+  -ms-transform: rotate(-90deg);
+
+  /* Opera */
+  -o-transform: rotate(-90deg);
+
+  /* Internet Explorer */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+}
+
+table.barby-barcode { border-spacing: 0; }
+tr.barby-row {}
+td.barby-cell { width: 3px; height: 100px; }
+td.barby-cell.on { background: #000; }

@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
       redirect_to event_ticket_orders_path(id: @order, event_id: @event.id, ticket_id: @tickets_allocation.id)
     else
       @client_token = Braintree::ClientToken.generate
-      flash[:alert] = payment_message.processor_response_text
+      flash[:alert] = (payment_message == false) ? 'Unable to process order' : payment_message.processor_response_text
       @params = params
       render :new
     end
@@ -38,7 +38,8 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(
-      :number_of_tickets
+      :number_of_tickets,
+      :names_on_ticket
     )
   end
 end
