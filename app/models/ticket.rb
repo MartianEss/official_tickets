@@ -33,12 +33,12 @@ class Ticket < ActiveRecord::Base
     self.create_tickets(order, event)
   end
 
-  def self.tickets_purchased
+  def self.tickets_purchased(tickets_allocation, event)
     Ticket.where(event: event, tickets_allocation_id: tickets_allocation.id)
   end
 
   def self.remaining(tickets_allocation, event)
-    (tickets_allocation.allocated - self.tickets_purchased.count)
+    (tickets_allocation.allocated - self.tickets_purchased(tickets_allocation, event).count)
   end
 
   protected
