@@ -42,7 +42,10 @@ class Order < ActiveRecord::Base
   def authorise_payment(payment_method)
     Braintree::Transaction.sale(
       amount: self.total_price.to_s,
-      payment_method_nonce: payment_method
+      payment_method_nonce: payment_method,
+      :options => {
+        :submit_for_settlement => true
+      }
     )
   end
 
