@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     resources :events, except: [:new, :create]
   end
 
+  resources :tickets, only: [:index]
+
   # Event Manager based resources
   namespace :event_managers do
     resources :events, as: :events do

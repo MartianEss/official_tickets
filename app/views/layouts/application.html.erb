@@ -12,7 +12,9 @@
     <div class="container">
       <%= nav_bar fixed: :top, brand: "Official Tickets", responsive: true do %>
         <%= menu_group do %>
-          <% if current_event_manager %>
+          <% if current_ticket_purchaser %>
+            <%= menu_item "Home", root_path %>
+          <% elsif current_event_manager %>
             <%= menu_item "Home", event_managers_root_path %>
           <% elsif current_customer_service %>
             <%= menu_item "Home", customer_services_root_path %>
@@ -20,7 +22,10 @@
             <%= menu_item "Home", root_path %>
           <%end %>
           <%= menu_divider %>
-          <% if current_event_manager %>
+          <% if current_ticket_purchaser %>
+              <%= menu_item "Events", event_managers_events_path %>
+              <%= menu_item "Purchased Tickets", tickets_path %>
+          <% elsif current_event_manager %>
             <%= drop_down "Manage Events" do %>
               <%= menu_item "New Event", new_event_managers_event_path %>
               <%= menu_item "Events", event_managers_events_path %>
@@ -35,12 +40,14 @@
           <% end %>
         <% end %>
         <%= menu_group pull: :right do %>
-          <% if current_event_manager %>
+          <% if current_ticket_purchaser %>
+            <%= menu_item "Log Out", destroy_ticket_purchaser_session_path, :method => :delete %>
+          <% elsif current_event_manager %>
             <%= menu_item "Log Out", destroy_event_manager_session_path, :method => :delete %>
           <% elsif current_customer_service %>
             <%= menu_item "Log Out", destroy_customer_service_session_path, :method => :delete %>
           <% else %>
-            <%= menu_item "Log In", new_event_manager_session_path %>
+            <%= menu_item "Log In as Event Managers", new_event_manager_session_path %>
           <% end %>
         <% end %>
       <% end %>

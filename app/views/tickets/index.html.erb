@@ -1,0 +1,33 @@
+<h1>Purchased Tickets</h1>
+
+<%- model_class = Ticket -%>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:serial) %></th>
+      <th><%= model_class.human_attribute_name(:ticket_purchaser) %></th>
+<%- model_class = Event -%>
+      <th><%= model_class.human_attribute_name(:event) %></th>
+<%- model_class = TicketsAllocation -%>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:ordered_for) %></th>
+      <th><%= model_class.human_attribute_name(:price) %></th>
+      <th>Purchased at</th>
+      <th><%= model_class.human_attribute_name(:used) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tickets.each do |ticket| %>
+      <tr>
+        <td><%= ticket.serial %></td>
+        <td><%= ticket.ticket_purchaser.full_name %></td>
+        <td><%= ticket.event.title %> - <%= ticket.event.location %></td>
+        <td><%= ticket.tickets_allocation.name %></td>
+        <td><%= ticket.ordered_for %></td>
+        <td>£<%= ticket.price %></td>
+        <td><%=l ticket.created_at %></td>
+        <td><%= ticket.used? %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
