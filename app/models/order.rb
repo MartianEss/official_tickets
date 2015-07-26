@@ -12,18 +12,21 @@ class Order < ActiveRecord::Base
   validates_associated :ticket_purchaser
   validates_associated :tickets_allocation
 
-  before_save :set_total_price
+  before_validation :set_total_price
+
   after_save :create_tickets, on: :create
 
   def process(payment_method, tickets_allocation, ticket_purchaser)
+    self.ticket_purchaser = ticket_purchaser
+    self.tickets_allocation = tickets_allocation
+    self.event_id = tickets_allocation.event.id
+
     Order.transaction do
-      if has_enough_tickets_for_sale? and payment_result = payment_successful?(payment_method)
-        self.ticket_purchaser = ticket_purchaser
-        self.tickets_allocation = tickets_allocation
-        self.event_id = tickets_allocation.event.id
-        save
+      if valid? and has_enough_tickets_for_sale?
+        payment_result = authorise_payment(payment_method)
+        purchase_and_save_order(payment_result)
       else
-        payment_result
+        false
       end
     end
   end
@@ -36,16 +39,11 @@ class Order < ActiveRecord::Base
     ((tickets_allocation.remaining - number_of_tickets) >= 0) ? true : false
   end
 
-  def payment_successful?(payment_method)
-    result = Braintree::Transaction.sale(
+  def authorise_payment(payment_method)
+    Braintree::Transaction.sale(
       amount: self.total_price.to_s,
       payment_method_nonce: payment_method
     )
-    if result.success?
-      true
-    else
-      result.errors
-    end
   end
 
   def more_than_one_name_on_ticket?
@@ -53,6 +51,15 @@ class Order < ActiveRecord::Base
   end
 
   protected
+
+  def purchase_and_save_order(payment_result)
+    if payment_result.success?
+      self.transaction_code = payment_result.transaction.id
+      save
+    else
+      payment_result
+    end
+  end
 
   def set_total_price
     self.total_price = 0

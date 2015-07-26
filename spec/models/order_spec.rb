@@ -27,6 +27,12 @@ RSpec.describe Order, type: :model do
     expect(subject).to be_valid
   end
 
+  it 'creates the correct number of tickets' do
+    subject.save
+
+    expect(subject.tickets.count).to eql(3)
+  end
+
   describe '#save' do
     it 'stores the total price' do
       subject.save
@@ -52,28 +58,40 @@ RSpec.describe Order, type: :model do
   describe '#process' do
     let(:nonce) { 'nonce-from-the-client' }
 
-    it 'checks tickets are available' do
-      expect(subject).to receive(:has_enough_tickets_for_sale?).at_least(:once).and_return true
-      subject.process(nonce, tickets_allocation, ticket_purchaser)
-    end
+    context 'success transaction' do
+      let(:braintree_response) { double(success?: true, transaction: double(id: 4)) }
 
-    it 'saves the order' do
-      allow(subject).to receive(:has_enough_tickets_for_sale?).and_return true
-      expect(subject).to receive(:save).and_return(true).at_least(:once)
+      before(:each) do
+        allow(subject).to receive(:authorise_payment).and_return(braintree_response)
+      end
 
-      subject.process(nonce, tickets_allocation, ticket_purchaser)
-    end
+      it 'checks tickets are available' do
+        expect(subject).to receive(:has_enough_tickets_for_sale?).at_least(:once).and_return true
+        subject.process(nonce, tickets_allocation, ticket_purchaser)
+      end
 
-    it 'creates the correct number of tickets' do
-      subject.save
+      it 'saves the order' do
+        allow(subject).to receive(:has_enough_tickets_for_sale?).and_return true
 
-      expect(subject.tickets.count).to eql(3)
+        expect(subject).to receive(:save).and_return(true).at_least(:once)
+
+        subject.process(nonce, tickets_allocation, ticket_purchaser)
+      end
+
+      it 'must have a valid order' do
+        expect(subject).to receive(:valid?).and_return(false)
+
+        expect(subject.process(nonce, tickets_allocation, ticket_purchaser)).to eql(false)
+      end
+
+      it 'stores the transaction id' do
+        subject.process(nonce, tickets_allocation, ticket_purchaser)
+        expect(subject.transaction_code).to eql('4')
+      end
     end
 
     context 'failed order' do
       let(:tickets_allocation) { TicketsAllocation.create!(name: 'Early Bird', price: 11.12, allocated: 2, event: event) }
-
-      subject { described_class.new(ticket_purchaser: ticket_purchaser, tickets_allocation: tickets_allocation, number_of_tickets: 3) }
 
       it 'event does not have enough tickets' do
         expect(subject.process(nonce, tickets_allocation, ticket_purchaser)).to be_falsey
