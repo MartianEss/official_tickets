@@ -77,7 +77,7 @@ RSpec.describe Ticket, type: :model do
 
   describe '.remaining' do
     it 'show the correct amount of tickets left' do
-      2.times { |i| Ticket.create!(event: event, order: order, ticket_purchaser: ticket_purchaser) }
+      allow(Ticket).to receive(:tickets_purchased).and_return([subject, subject])
 
       expect(Ticket.remaining(tickets_allocation, event)).to eql(1)
     end
