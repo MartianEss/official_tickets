@@ -104,9 +104,21 @@ RSpec.describe Order, type: :model do
         subject.process(nonce, tickets_allocation, ticket_purchaser)
       end
 
-      context 'payment failed' do
-        it 'card declined'
+    end
+  end
+
+  describe '#authorise_payment' do
+    let(:nonce) { 'nonce-from-the-client' }
+
+    context 'payment authoriseed' do
+      it 'returns a braintree object' do
+        subject.total_price = 50
+        expect(subject.authorise_payment(nonce)).to be_a(Braintree::SuccessfulResult)
       end
+    end
+
+    context 'payment failed' do
+      it 'card declined'
     end
   end
 end
