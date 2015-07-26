@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Ticket, type: :model do
-  let(:event) { Event.create!event_params }
+  let(:event) { Event.create!(event_params) }
 
   let(:ticket_purchaser) do
     TicketPurchaser.create!(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
   end
 
   let(:tickets_allocation) { TicketsAllocation.create!(name: 'Early Bird', price: 11.12, allocated: 3, event: event) }
-  let(:order) { Order.create!(ticket_purchaser: ticket_purchaser, tickets_allocation: tickets_allocation, number_of_tickets: 3, names_on_ticket: 'foo wong, bar jones, joe smith') }
+  let(:order) { Order.create!(event_id: event.id, ticket_purchaser: ticket_purchaser, tickets_allocation: tickets_allocation, number_of_tickets: 3, names_on_ticket: 'foo wong, bar jones, joe smith') }
 
   subject { described_class.new(order: order, event: event, ticket_purchaser: ticket_purchaser) }
 
@@ -56,22 +56,6 @@ RSpec.describe Ticket, type: :model do
 
       expect(subject).to be_invalid
       expect(subject.errors.messages[:ticket_purchaser]).to include('can\'t be blank')
-    end
-  end
-
-  describe '.purchase' do
-    it 'gets the total prices of the tickets' do
-      expect(order.total_price).to eql(33.36)
-    end
-
-    it 'creates the right number of tickets' do
-      Ticket.purchase(order, event)
-
-      expect(order.tickets.count).to eql(3)
-    end
-
-    context 'failed purchase' do
-      it 'does not create tickets'
     end
   end
 

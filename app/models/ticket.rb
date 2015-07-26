@@ -29,10 +29,6 @@ class Ticket < ActiveRecord::Base
     outputter.to_svg
   end
 
-  def self.purchase(order, event)
-    self.create_tickets(order, event)
-  end
-
   def self.tickets_purchased(tickets_allocation, event)
     Ticket.where(event: event, tickets_allocation_id: tickets_allocation.id)
   end
@@ -42,11 +38,6 @@ class Ticket < ActiveRecord::Base
   end
 
   protected
-
-  def self.create_tickets(order, event)
-    names = order.names_on_ticket.split(',')
-    order.number_of_tickets.times { |i| self.create!(ordered_for: names[i].strip, order: order, event: event, ticket_purchaser: order.ticket_purchaser, tickets_allocation: order.tickets_allocation) }
-  end
 
   def set_serial
     self.serial = "%.3s-%.6d" % [event.title.upcase, (Ticket.where(event: event).count + 1)]
