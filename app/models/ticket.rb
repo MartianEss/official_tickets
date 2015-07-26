@@ -45,7 +45,7 @@ class Ticket < ActiveRecord::Base
 
   def self.create_tickets(order, event)
     names = order.names_on_ticket.split(',')
-    order.number_of_tickets.times { |i| self.create!(ordered_for: names[i].strip, order: order, event: event, ticket_purchaser: order.ticket_purchaser) }
+    order.number_of_tickets.times { |i| self.create!(ordered_for: names[i].strip, order: order, event: event, ticket_purchaser: order.ticket_purchaser, tickets_allocation: order.tickets_allocation) }
   end
 
   def set_serial
