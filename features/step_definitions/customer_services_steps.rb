@@ -60,9 +60,9 @@ When(/^I verify the events manager$/) do
 end
 
 When(/^I choose the unverified event$/) do
-  unverified_event = Event.where(approved: false).first
+  unverified_event = Event.where(approved: false).last
 
-  visit customer_services_event_path(id: unverified_event)
+  visit customer_services_event_path(unverified_event)
 end
 
 When(/^I verify the event$/) do

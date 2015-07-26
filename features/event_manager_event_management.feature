@@ -53,9 +53,6 @@ Feature: Creating a new event
       | genre             | Breaks                           |
       | dress_code        | Casual                           |
       | contact_number    | 0208 222 2222                    |
-      | ticket_type       | VIP                              |
-      | price             | 24.00                            |
-      | tickets_allocated | 100                              |
 
   @wip
   Scenario: The event manager is a new user

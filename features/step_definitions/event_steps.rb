@@ -14,17 +14,13 @@ When(/^I fill in the following events information:$/) do |table|
   select_time value[:time_to], label: "Time to"
 
   fill_in "event_contact_number", with: value[:contact_number]
-
-  fill_in "event_ticket_type", with: value[:ticket_type]
-  fill_in "event_price", with: value[:price]
-  fill_in "event_tickets_allocated", with: value[:tickets_allocated]
 end
 
 Given(/^there is (\d+) unverified event$/) do |amount|
   event_manager = EventManager.where(approved: true).first
 
   amount.to_i.times do
-    Event.create!(event_params(event_manager: event_manager, approved: false))
+    event_manager.events.create!(event_params(approved: false))
   end
 end
 
@@ -32,7 +28,7 @@ Given(/^there is (\d+) verified event$/) do |amount|
   event_manager = EventManager.where(approved: true).first
 
   amount.to_i.times do
-    Event.create!(event_params(event_manager: event_manager, approved: true))
+    event_manager.events.create!(event_params(approved: true))
   end
 end
 
