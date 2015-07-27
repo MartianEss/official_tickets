@@ -5,6 +5,11 @@
       <%= raw ticket.barcode %>
     </section>
 
+    <section class='ticket-information rotate fixed'>
+      <p><strong>Ticket Type:</strong></br><%= ticket.order.tickets_allocation.name %></p>
+      <p><strong>Ticket Price:</strong></br><%= ticket.order.tickets_allocation.price %></p>
+    </section>
+
     <section class='event'>
       <section class='event-information'>
         <h2><%= ticket.event.title.upcase %></h2>
@@ -19,14 +24,13 @@
 
       <section class='event-reference'>
         <p><strong>Name:</strong> <%= ticket.ordered_for %></p>
-        <p><strong>Booked by:</strong> <%= ticket.order.ticket_purchaser.full_name %></p>
-        <p><strong>Ref:</strong> <%= ticket.serial %></p>
+        <p><strong>Ref #:</strong> <%= ticket.serial %></p>
       </section>
 
+      <section class='event-purchase'>
+        <p><strong>Order Info:</strong>Booked by <%= ticket.order.ticket_purchaser.full_name %></p>
+      </section>
     </section>
-  </section>
-  <section class='ticket-information rotate fixed'>
-    <p><strong>Ticket Type:</strong> <%= ticket.order.tickets_allocation.name %></p>
-    <p><strong>Ticket Price:</strong> <%= ticket.order.tickets_allocation.price %></p>
+
   </section>
 </section>
