@@ -23,17 +23,17 @@
           <%end %>
           <%= menu_divider %>
           <% if current_ticket_purchaser %>
-              <%= menu_item "Events", event_managers_events_path %>
+              <%= menu_item "Current Events", event_managers_events_path %>
               <%= menu_item "Purchased Tickets", tickets_path %>
           <% elsif current_event_manager %>
             <%= drop_down "Manage Events" do %>
               <%= menu_item "New Event", new_event_managers_event_path %>
-              <%= menu_item "Events", event_managers_events_path %>
+              <%= menu_item "My Events", event_managers_events_path %>
             <% end %>
           <% elsif current_customer_service %>
             <%= drop_down "Manage Event Managers" do %>
-              <%= menu_item "Event Managers", customer_services_event_managers_path %>
-              <%= menu_item "Events", customer_services_events_path %>
+              <%= menu_item "Manage Event Managers", customer_services_event_managers_path %>
+              <%= menu_item "Manage Events", customer_services_events_path %>
             <% end %>
           <% else %>
             <%= menu_item "Event", events_path %>
