@@ -5,10 +5,11 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:event_type) %></th>
       <th><%= model_class.human_attribute_name(:dress_code) %></th>
+      <th><%= model_class.human_attribute_name(:venue) %></th>
       <th><%= model_class.human_attribute_name(:location) %></th>
       <th><%= model_class.human_attribute_name(:genre) %></th>
       <th><%= model_class.human_attribute_name(:date_from) %></th>
@@ -17,6 +18,7 @@
       <th><%= model_class.human_attribute_name(:time_from) %></th>
       <th><%= model_class.human_attribute_name(:contact_number) %></th>
       <th><%= model_class.human_attribute_name(:approved) %></th>
+      <th>Tickets types</th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -24,10 +26,11 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= link_to event.id, event_managers_event_path(event) %></td>
         <td><%= event.title %></td>
         <td><%= event.description %></td>
+        <td><%= event.event_type %></td>
         <td><%= event.dress_code %></td>
+        <td><%= event.venue %></td>
         <td><%= event.location %></td>
         <td><%= event.genre %></td>
         <td><%= event.date_from %></td>
@@ -36,8 +39,11 @@
         <td><%= event.time_from %></td>
         <td><%= event.contact_number %></td>
         <td><%= event.approved %></td>
+        <td><%= event.tickets_allocations.count %></td>
         <td><%=l event.created_at %></td>
         <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      event_managers_event_path(event), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_event_managers_event_path(event), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

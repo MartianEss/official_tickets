@@ -4,11 +4,17 @@ module OfficialTickets
       params = {
         title:  Faker::Lorem.word,
         description:  Faker::Lorem.words.join(' '),
-        location: Faker::Address.street_address,
         contact_number: Faker::PhoneNumber.phone_number,
 
-        genre: Faker::Lorem.word,
-        dress_code: Faker::Lorem.word,
+        genre_id: 1,
+        dress_code_id: 1,
+        event_type_id: 1,
+
+        venue: Faker::Lorem.words(3).join(' '),
+        address_line1: Faker::Address.street_address,
+        town_city: Faker::Address.city,
+        post_code: Faker::Address.postcode,
+
         date_from: Faker::Date.between(Date.today, Date.today.next_year),
         date_to: Faker::Date.between(Date.today.tomorrow, Date.today.next_year),
         time_from: Faker::Time.between(Time.now, Time.now.next_year, :all),

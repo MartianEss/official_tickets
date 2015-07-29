@@ -8,8 +8,10 @@ Feature: Creating a new event
     When I fill in the following events information:
       | title             | Offical Events Opening           |
       | description       | some information about the event |
-      | location          | Brighton                         |
-      | genre             | Breaks                           |
+      | address_line1     | 123 Some Road                    |
+      | town_city         | Brighton                         |
+      | post_code         | BA19 4QS                         |
+      | genre_id          | Breaks                           |
       | dress_code        | Casual                           |
       | date_from         | 23/03/2020                       |
       | date_to           | 23/03/2020                       |
@@ -32,27 +34,11 @@ Feature: Creating a new event
 
     Examples: Fields that require verification
       | field     | value      |
-      | location  | Brixton    |
+      | town_city | Brixton    |
       | Date from | 23/03/2020 |
       | Date to   | 23/03/2020 |
       | Time to   | 11:00      |
       | Time from | 21:00      |
-
-  Scenario Outline: Event fields that require no verification
-    Given I am signed in as a verified event manager
-    And there is 1 verified event
-    And I view the last verified event
-    When I update the event's "<field>" with "<value>"
-    And I update the event
-    Then the event should still be available
-
-    Examples: Fields that don't require verification
-      | field             | value                            |
-      | title             | Offical Events Opening           |
-      | description       | some information about the event |
-      | genre             | Breaks                           |
-      | dress_code        | Casual                           |
-      | contact_number    | 0208 222 2222                    |
 
   @wip
   Scenario: The event manager is a new user

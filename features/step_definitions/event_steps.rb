@@ -3,7 +3,9 @@ When(/^I fill in the following events information:$/) do |table|
 
   fill_in "event_title", with: value[:title]
   fill_in "event_description", with: value[:description]
-  fill_in "event_location", with: value[:location]
+  fill_in "event_address_line1", with: value[:location]
+  fill_in "event_town_city", with: value[:town_city]
+  fill_in "event_post_code", with: value[:post_code]
   fill_in "event_genre", with: value[:genre]
   fill_in "event_dress_code", with: value[:dress_code]
 

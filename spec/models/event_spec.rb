@@ -1,6 +1,74 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
+  subject { described_class.create!(event_params) }
+
+  it 'must be valid' do
+    expect(subject).to be_valid
+  end
+
+  context 'validations' do
+    it 'must have a name' do
+      subject.title = ''
+      expect(subject).to be_invalid
+    end
+
+    it 'must have a description' do
+      subject.description = ''
+      expect(subject).to be_invalid
+    end
+
+    it 'must have a dress code' do
+      subject.dress_code_id = ''
+      expect(subject).to be_invalid
+    end
+
+    it 'must have a genre' do
+      subject.genre_id = ''
+      expect(subject).to be_invalid
+    end
+
+    it 'must have an event type' do
+      subject.event_type_id = ''
+      expect(subject).to be_invalid
+    end
+
+    it 'must have a venue name' do
+      subject.venue = ''
+      expect(subject).to be_invalid
+    end
+
+    it 'must have a venue an address line' do
+      subject.address_line1 = ''
+      expect(subject).to be_invalid
+    end
+
+    it 'must have a venue an town or city' do
+      subject.town_city = ''
+      expect(subject).to be_invalid
+    end
+
+    it 'must have a venue an post code' do
+      subject.post_code = ''
+      expect(subject).to be_invalid
+    end
+
+    it 'must have a date from' do
+      subject.date_from = nil
+      expect(subject).to be_invalid
+    end
+
+    it 'must have a date to' do
+      subject.date_to = nil
+      expect(subject).to be_invalid
+    end
+
+    it 'must have a contact number' do
+      subject.contact_number = ''
+      expect(subject).to be_invalid
+    end
+  end
+
   describe '#needs_reapproval?' do
     it 'checks that the event is approved' do
       expect(subject).to receive(:needs_reapproval?).and_return true
@@ -14,33 +82,30 @@ RSpec.describe Event, type: :model do
   end
 
   context 'approved event changed' do
-    let(:event_params) do
-      {
-        title:  Faker::Lorem.word,
-        description:  Faker::Lorem.words.join(' '),
-        location: Faker::Address.street_address,
-        contact_number: Faker::PhoneNumber.phone_number,
-
-        genre: Faker::Lorem.word,
-        dress_code: Faker::Lorem.word,
-        date_from: Faker::Date.between(Date.today, Date.today.next_year),
-        date_to: Faker::Date.between(Date.today.tomorrow, Date.today.next_year),
-        time_from: Faker::Time.between(Time.now, Time.now.next_year, :all),
-        time_to: Faker::Time.between(Time.now.tomorrow, Time.now.next_year, :all),
-
-        approved: true
-      }
-    end
-
-    subject { described_class.create!(event_params) }
+    subject { described_class.create!(event_params(approved: true)) }
 
     it 'should be approved' do
       expect(subject).to be_approved
     end
 
     context 'attributes that require reapproval' do
-      it 'changes location' do
-        subject.update_attribute(:location, 'London')
+      it 'changes first line of address' do
+        subject.update_attribute(:address_line1, Faker::Address.street_address)
+        expect(subject).to be_unapproved
+      end
+
+      it 'changes second line of address' do
+        subject.update_attribute(:address_line2, Faker::Address.street_address)
+        expect(subject).to be_unapproved
+      end
+
+      it 'changes post code' do
+        subject.update_attribute(:post_code, 'E9 2AE')
+        expect(subject).to be_unapproved
+      end
+
+      it 'changes city' do
+        subject.update_attribute(:town_city, 'London')
         expect(subject).to be_unapproved
       end
 
