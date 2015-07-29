@@ -30,7 +30,12 @@ class Event < ActiveRecord::Base
   end
 
   def location
-    "#{address_line1}, #{address_line2}, #{town_city}, #{post_code}"
+    [
+      address_line1,
+      address_line2,
+      town_city,
+      post_code
+    ].compact.join(', ')
   end
 
   def time_to=(time)
