@@ -22,11 +22,11 @@ class Event < ActiveRecord::Base
   end
 
   def dress_code
-    DressCode.find(self.event_type_id).name
+    DressCode.find(self.dress_code_id).name
   end
 
   def genre
-    Genre.find(self.event_type_id).name
+    Genre.find(self.genre_id).name
   end
 
   def location
