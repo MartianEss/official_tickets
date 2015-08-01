@@ -3,7 +3,7 @@
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
-<dl class="dl-horizontal">
+<dl class="dl-horizontal ticket-summary">
   <dt><strong><%= model_class.human_attribute_name(:number_of_tickets) %>:</strong></dt>
   <dd><%= @order.number_of_tickets %></dd>
   <dt><strong><%= model_class.human_attribute_name(:total_price) %>:</strong></dt>

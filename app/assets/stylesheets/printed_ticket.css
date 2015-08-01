@@ -1,0 +1,82 @@
+section.ticket h2,h3,h4,p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+section.ticket {
+  page-break-after: always;
+}
+
+section.ticket {
+  border: solid thin;
+  padding: 2px;
+  margin: 20px;
+  width: 540px;
+  height: 240px;
+}
+
+section.event-date {
+  font-weight: bold;
+}
+
+section.information {
+  margin: 0;
+  width: auto;
+  height: inherit;
+  float: left;
+  display: inline-block;
+  padding: 0px;
+}
+
+section.ticket-information {
+  width: 150px;
+  float: right;
+  top: 60px;
+  left: 20px;
+  background: gray;
+}
+
+section.event {
+  float: left;
+  display: inline-block;
+  position: relative;
+  right: 35px;
+  bottom: 60px;
+}
+
+section.fixed {
+  position: relative;
+}
+
+section.event-barcode {
+  position: relative;
+  top: 34px;
+  right: 15px;
+  float: left;
+}
+
+.rotate {
+
+  /* Safari */
+  -webkit-transform: rotate(-90deg);
+
+  /* Firefox */
+  -moz-transform: rotate(-90deg);
+
+  /* IE */
+  -ms-transform: rotate(-90deg);
+
+  /* Opera */
+  -o-transform: rotate(-90deg);
+
+  /* Internet Explorer */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+}
+
+table.barby-barcode { border-spacing: 0; }
+tr.barby-row {}
+td.barby-cell { width: 3px; height: 100px; }
+td.barby-cell.on { background: #000; }
+
+
