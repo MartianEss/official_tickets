@@ -4,6 +4,7 @@ class Order < ActiveRecord::Base
   has_one :tickets_allocation
 
   has_many :tickets, dependent: :destroy
+
   has_one :event
 
   validate :validate_tickets_remaiing, on: :create

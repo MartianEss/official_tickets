@@ -1,12 +1,8 @@
 class Event < ActiveRecord::Base
   belongs_to :event_manager
 
-  has_many :orders
-  has_many :tickets_allocations
-
-  has_one :genre
-  has_one :event_type
-  has_one :dress_code
+  has_many :orders, dependent: :destroy
+  has_many :tickets_allocations, dependent: :destroy
 
   before_save :set_approval_status, unless: -> { self.new_record? }
 

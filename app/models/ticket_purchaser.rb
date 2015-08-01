@@ -4,7 +4,7 @@ class TicketPurchaser < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :orders
+  has_many :orders, dependent: :destroy
   has_many :tickets
 
   def full_name
