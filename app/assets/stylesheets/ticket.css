@@ -4,15 +4,12 @@ section.ticket h2,h3,h4,p {
 }
 
 section.ticket {
-  page-break-after: always;
-}
-
-section.ticket {
   border: solid thin;
   padding: 2px;
   margin: 20px;
   width: 540px;
   height: 240px;
+  page-break-after: always;
 }
 
 section.event-date {
@@ -33,7 +30,7 @@ section.ticket-information {
   float: right;
   top: 60px;
   left: 20px;
-  background: gray;
+  background: gray !important;
 }
 
 section.event {
