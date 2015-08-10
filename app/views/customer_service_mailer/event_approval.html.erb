@@ -1,1 +1,8 @@
+Hi <%= @event_manger.full_name %>
+
 Your event <%= @event.title %> has been approved.
+
+You can now find your event listed on <%= link_to @event.title, event_path(@event) %>
+ **and the Official Events App**
+
+**Display only if event type matches the following - party, day/night party, after party, boat party, concert, festival, rave, comedy
