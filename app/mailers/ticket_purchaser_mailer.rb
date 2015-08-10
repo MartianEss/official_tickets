@@ -4,6 +4,6 @@ class TicketPurchaserMailer < ApplicationMailer
     @ticket_purchaser = order.ticket_purchaser
     @event = Event.find(order.event_id)
 
-    mail(to: @ticket_purchaser.email, subject: "Your tickets for #{@event.title}")
+    mail(to: @ticket_purchaser.email, subject: "#{@event.title} - Official Tickets")
   end
 end
