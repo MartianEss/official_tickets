@@ -40,6 +40,6 @@ class Ticket < ActiveRecord::Base
   protected
 
   def set_serial
-    self.serial = "%.3s-%.6d" % [event.title.upcase, (Ticket.where(event: event).count + 1)]
+    self.serial = "%6s-%.6d" % [order.transaction_code.upcase, (Ticket.where(event: event).count + 1)]
   end
 end
