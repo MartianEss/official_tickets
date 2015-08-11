@@ -83,4 +83,6 @@ Rails.application.configure do
     :authentication => 'login',
     :domain => 'official-tickets-beta.herokuapp.com', # your domain to identify your server when connecting
   }
+
+  config.action_mailer.default_url_options = { host: 'official-tickets-beta.herokuapp.com' }
 end
