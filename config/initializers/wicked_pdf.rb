@@ -1,4 +1,4 @@
-wkhtmltopdf = (Rails.env == 'production' or Rails.env == 'staging') ? Rails.root.join('lib', 'wkhtmltopdf-amd64').to_s : '/usr/local/bin/wkhtmltopdf'
+wkhtmltopdf = (Rails.env == 'production' or Rails.env == 'staging') ? Rails.root.join('bin', 'wkhtmltopdf-amd64').to_s : '/usr/local/bin/wkhtmltopdf'
 WickedPdf.config = {
   :exe_path => wkhtmltopdf,
   :print_media_type => true,
