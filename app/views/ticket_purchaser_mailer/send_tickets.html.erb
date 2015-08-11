@@ -4,12 +4,12 @@ Please see your ticket confirmation
 
 See ticket attached.
 
-Event: <%= @event.title %>
-Date / Time: <%= @event.date %> - <%= @event.time_from %>
+<%= @event.title %>
+Date / Time: <%= @event.date_from %> - <%= @event.time_from %>
 Venue Address: <%= @event.location %>
-Qty: <%= @ticket_allocation.number_of_tickets %>
+Qty: <%= @order.number_of_tickets %>
 Ticket Ref #
 
 <%= link_to event_ticket_orders_url(id: @order, event_id: @event.id, ticket_id: @tickets_allocation.id, format: :pdf), 'Link to downloadable copy of tickets' %>
 
-For any queries contact <%= mail_to info@officialtickets.co.uk %>
+For any queries contact <%= mail_to 'info@officialtickets.co.uk' %>
