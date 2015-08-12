@@ -8,7 +8,7 @@ See ticket attached.
 Date / Time: <%= @event.date_from %> - <%= @event.time_from %>
 Venue Address: <%= @event.location %>
 Qty: <%= @order.number_of_tickets %>
-Ticket Ref #
+Ticket Ref <%= @order.transaction_code %>
 
 <%= link_to 'Link to downloadable copy of tickets', event_ticket_orders_url(id: @order, event_id: @event.id, ticket_id: @tickets_allocation.id, format: :pdf) %>
 

@@ -1,15 +1,25 @@
-Thank you for using House of Tickets.
+<p>
+  Thank you for using House of Tickets.
+</p>
 
-Please see your ticket confirmation
+<p>
+  Please see your ticket confirmation
+</p>
 
-See ticket attached.
+<p>
+  See ticket attached.
+</p>
 
-<%= @event.title %>
-Date / Time: <%= @event.date_from %> - <%= @event.time_from %>
-Venue Address: <%= @event.location %>
-Qty: <%= @order.number_of_tickets %>
-Ticket Ref #
+<%= @event.title %></br>
+Date / Time: <%= @event.date_from %> - <%= @event.time_from %></br>
+Venue Address: <%= @event.location %></br>
+Qty: <%= @order.number_of_tickets %></br>
+Ticket Ref <%= @order.transaction_code %></br>
 
-<%= link_to 'Link to downloadable copy of tickets', event_ticket_orders_url(id: @order, event_id: @event.id, ticket_id: @tickets_allocation.id, format: :pdf) %>
+<p>
+  <%= link_to 'Link to downloadable copy of tickets', event_ticket_orders_url(id: @order, event_id: @event.id, ticket_id: @tickets_allocation.id, format: :pdf) %>
+</p>
 
-For any queries contact <%= mail_to 'info@officialtickets.co.uk' %>
+<p>
+  For any queries contact <%= mail_to 'info@officialtickets.co.uk' %>
+</p>
