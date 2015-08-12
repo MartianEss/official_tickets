@@ -8,7 +8,7 @@ RSpec.describe Ticket, type: :model do
   end
 
   let(:tickets_allocation) { TicketsAllocation.create!(name: 'Early Bird', price: 11.12, allocated: 3, event: event) }
-  let(:order) { Order.create!(event_id: event.id, ticket_purchaser: ticket_purchaser, tickets_allocation: tickets_allocation, number_of_tickets: 3, names_on_ticket: 'foo wong, bar jones, joe smith') }
+  let(:order) { Order.create!(event_id: event.id, ticket_purchaser: ticket_purchaser, tickets_allocation: tickets_allocation, number_of_tickets: 3, names_on_ticket: 'foo wong, bar jones, joe smith', transaction_code: '234DSA') }
 
   subject { described_class.new(order: order, event: event, ticket_purchaser: ticket_purchaser) }
 
@@ -25,7 +25,7 @@ RSpec.describe Ticket, type: :model do
   end
 
   context 'after saving' do
-    let(:expected_serial) { "%.3s-%.6d" % [event.title.upcase, (Ticket.where(event: event).count)] }
+    let(:expected_serial) { "%.6s-%.6d" % [order.transaction_code.upcase, (Ticket.where(event: event).count)] }
 
     it 'generates a unique serial' do
       subject.save
