@@ -3,6 +3,8 @@
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
+<%= link_to 'PDF Format', event_ticket_order_url(id: @order.id, event_id: @order.event_id, ticket_id: @order.tickets_allocation.id, format: :pdf) %></br>
+
 <dl class="dl-horizontal ticket-summary">
   <dt><strong><%= model_class.human_attribute_name(:number_of_tickets) %>:</strong></dt>
   <dd><%= @order.number_of_tickets %></dd>
