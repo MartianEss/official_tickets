@@ -10,6 +10,6 @@ Venue Address: <%= @event.location %>
 Qty: <%= @order.number_of_tickets %>
 Ticket Ref <%= @order.transaction_code %>
 
-<%= link_to 'Link to downloadable copy of tickets', event_ticket_orders_url(id: @order, event_id: @event.id, ticket_id: @tickets_allocation.id, format: :pdf) %>
+<%= link_to 'Your Tickets', event_ticket_order_url(id: @order.id, event_id: @order.event_id, ticket_id: @order.tickets_allocation.id, format: :pdf) %>
 
 For any queries contact <%= mail_to 'info@officialtickets.co.uk' %>

@@ -18,6 +18,7 @@ class OrdersController < ApplicationController
     @order = @event.orders.new(order_params)
 
     if payment_message = @order.process(params[:payment_method_nonce], @tickets_allocation, current_ticket_purchaser)
+      @order.save
       TicketPurchaserMailer.send_tickets(@order).deliver_now
       redirect_to event_ticket_orders_path(id: @order, event_id: @event.id, ticket_id: @tickets_allocation.id)
     else
