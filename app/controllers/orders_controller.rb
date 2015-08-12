@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
   before_action :authenticate_ticket_purchaser!
 
   def index
-    @event = Event.where(approved: true).find(params[:event_id])
     @orders = current_ticket_purchaser.orders
   end
 
