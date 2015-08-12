@@ -23,10 +23,10 @@
           <%end %>
           <%= menu_divider %>
           <% if current_ticket_purchaser %>
-              <%= menu_item "Current Events", event_managers_events_path %>
               <%= menu_item "Purchased Tickets", tickets_path %>
           <% elsif current_event_manager %>
             <%= drop_down "Manage Events" do %>
+              <%= menu_item "Current Events", event_managers_events_path %>
               <%= menu_item "New Event", new_event_managers_event_path %>
               <%= menu_item "My Events", event_managers_events_path %>
             <% end %>
