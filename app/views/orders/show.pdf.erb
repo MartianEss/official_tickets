@@ -1,4 +1,5 @@
-<% @order.tickets.each do |ticket| %>
+<% order = @order if @order %>
+<% order.tickets.each do |ticket| %>
 <section class='ticket'>
   <section class='information'>
 
